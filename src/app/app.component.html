@@ -1,0 +1,95 @@
+<div class="container mt-5">
+  <form class="row g-3 needs-validation" [formGroup]="form" (ngSubmit)="guardar()">
+    <div class="col-md-4">
+      <label for="validationCustom01" class="form-label">Monto (decimal)</label>
+      <input step="0.1" formControlName="monto" type="number" class="form-control" id="validationCustom01" value="Mark" required>
+
+      <div *ngIf="f['monto'].invalid && (f['monto'].dirty || f['monto'].touched) ; else Blockmonto"
+        class="invalid-message-text">
+        <div *ngIf="f['monto'].errors?.['required']">
+          Monto es requerido.
+        </div>
+
+        <div *ngIf="f['monto'].errors?.['minlength']">
+          Monto debe tener como minimo 4 caracteres.
+        </div>
+
+        <div *ngIf="f['monto'].errors?.['pattern']">
+          Monto debe ser decimal.
+        </div>
+
+      </div>
+      <ng-template #Blockmonto>
+        <div *ngIf="form.get('monto').valid" class="valid-message-text">
+          Monto es correcto.
+        </div>
+      </ng-template>
+
+
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustom02" class="form-label">No Vacios</label>
+      <input formControlName="vacio" type="text" class="form-control" id="validationCustom02" value="Otto" required>
+
+      <div
+      *ngIf="f['vacio'].invalid && (f['vacio'].dirty || f['vacio'].touched) ; else Blockvacio"
+      class="invalid-message-text">
+      <div *ngIf="f['vacio'].errors?.['required']">
+        Decripcion es requerido.
+      </div>
+
+      <div *ngIf="f['vacio'].errors?.['minlength']">
+        Decripcion debe tener como minimo 4 caracteres.
+      </div>
+
+      <div *ngIf="f['vacio'].errors?.['pattern']">
+        Tiene vacio al inicio
+      </div>
+
+    </div>
+    <ng-template #Blockvacio>
+      <div *ngIf="form.get('vacio').valid" class="valid-message-text">
+        Decripcion es correcto.
+      </div>
+    </ng-template>
+
+
+
+    </div>
+    <div class="col-md-4">
+      <label for="validationCustomUsername" class="form-label">Correo (gmail)</label>
+      <div class="input-group has-validation">
+        <span class="input-group-text" id="inputGroupPrepend">@</span>
+        <input formControlName="correo" type="text" class="form-control" id="validationCustomUsername"
+          aria-describedby="inputGroupPrepend" required>
+          <div
+          *ngIf="f['correo'].invalid && (f['correo'].dirty || f['correo'].touched) ; else Blockcorreo"
+          class="invalid-message-text">
+          <div *ngIf="f['correo'].errors?.['required']">
+            Decripcion es requerido.
+          </div>
+
+          <div *ngIf="f['correo'].errors?.['minlength']">
+            Decripcion debe tener como minimo 4 caracteres.
+          </div>
+
+          <div *ngIf="f['correo'].errors?.['pattern']">
+            No es correo
+          </div>
+
+
+        </div>
+        <ng-template #Blockcorreo>
+          <div *ngIf="form.get('correo').valid" class="valid-message-text">
+            Decripcion es correcto.
+          </div>
+        </ng-template>
+      </div>
+    </div>
+
+
+    <div class="col-12" style="text-align: center;">
+      <button class="btn btn-primary" type="submit">Submit form</button>
+    </div>
+  </form>
+</div>
